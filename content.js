@@ -226,7 +226,7 @@ function addTaintHooks( thisWindow ) {
     // taint the referrer (maybe this should be a valid URL to detect SSRF?)
     //
     Object.defineProperty(thisWindow.document, 'referrer', {
-        value: "https://" + taintString + ".example.com/"+ taintString + filterString + ".referrer" + window.location.search + window.location.hash,
+        value: "https://avlidienbrunn.se/debug.js?a=?&"+ taintString + filterString + ".referrer" + window.location.search + window.location.hash,
         writable: false
     });
 
@@ -271,6 +271,7 @@ function addTaintHooks( thisWindow ) {
             //console.log("History.pushState: " + JSON.stringify(arguments[0]) + ", " + arguments[1] + ", " + arguments[2]);
             return thisWindow.History.prototype.orgPushState.apply(this, arguments);
         };
+        thisWindow.history.replaceState(0,0,location.origin+"//avlidienbrunn.se/debug.js"+(location.search===""?"?":location.search)+"&a=?&b"+location.hash)
         thisWindow.History.prototype.orgReplaceState = thisWindow.History.prototype.replaceState;
         thisWindow.History.prototype.replaceState = function(){
 
