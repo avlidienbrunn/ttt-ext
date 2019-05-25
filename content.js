@@ -271,7 +271,7 @@ function addTaintHooks( thisWindow ) {
             //console.log("History.pushState: " + JSON.stringify(arguments[0]) + ", " + arguments[1] + ", " + arguments[2]);
             return thisWindow.History.prototype.orgPushState.apply(this, arguments);
         };
-        thisWindow.history.replaceState(0,0,location.origin+"//avlidienbrunn.se/debug.js"+(location.search===""?"?":location.search)+"&a=?&b"+location.hash)
+        thisWindow.history.replaceState(0,0,thisWindow.location.origin+"//avlidienbrunn.se/debug.js"+(thisWindow.location.search===""?"?":thisWindow.location.search)+"&a=?&b"+thisWindow.location.hash)
         thisWindow.History.prototype.orgReplaceState = thisWindow.History.prototype.replaceState;
         thisWindow.History.prototype.replaceState = function(){
 
